@@ -76,6 +76,7 @@ class RunnerRepository:
             .limit(limit)
             .all()
         )
+        print("TOP-RUNNERS: ", top_runners)
         return top_runners
 
     def update_address_club(self, runner_id: int, address_club_data: schemas.RunnerAddressClubUpdate):

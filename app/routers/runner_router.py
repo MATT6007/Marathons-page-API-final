@@ -78,7 +78,21 @@ async def get_user_competitions(
 @router.get("/top-runners")
 def get_top_runners(runner_service: RunnerService = Depends()):
     top_runners = runner_service.get_top_runners()
-    return top_runners
+    formatted_data = [
+        {
+            "ID_runner": row[0],
+            "first_name": row[1],
+            "last_name": row[2],
+            "date_of_birth": row[3],
+            "club": row[4],
+            "image_url": row[5],
+            "races_participated": row[6],
+        }
+        for row in top_runners
+    ]
+
+    return formatted_data
+    # return top_runners
 
 @router.post("/update-address-club", response_model=RunnerSchema)
 def update_address_club(
