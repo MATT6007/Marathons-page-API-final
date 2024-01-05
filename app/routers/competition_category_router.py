@@ -9,10 +9,10 @@ from models.runner import Runner
 router = APIRouter(tags=["CompetitionCategory"])
 
     
-@router.get("/competition_category/{competition_category_id}", response_model=Type[CompetitionCategory])
+@router.get("/competition_category/{competition_category_id}", response_model=CompetitionCategory)
 def get_competition_category(competition_category_id: int, competition_category_service: CompetitionCategoryService = Depends(),
                current_user: Runner = Depends(get_current_active_user)) -> Type[CompetitionCategory]:
-    category = competition_category_service.get_address(competition_category_id)
+    category = competition_category_service.get_competition_category(competition_category_id)
     if not category:
         raise HTTPException(status_code=404, detail="Competition category not found")
     return category
@@ -23,9 +23,9 @@ def create_competition_category(competition_category_create: CompetitionCategory
     category = competition_category_service.create_competition_category(competition_category_create)
     return category
 
-@router.put("/competition_category/{competition_category_id}", response_model=Type[CompetitionCategory])
+@router.put("/competition_category/{competition_category_id}")
 def update_competition_category(competition_category_id: int, competition_category_update: CompetitionCategoryUpdate, competition_category_service: CompetitionCategoryService = Depends(),
-                  current_user: Runner = Depends(get_current_active_user)) -> Type[CompetitionCategory]:
+                  current_user: Runner = Depends(get_current_active_user)):
     category = competition_category_service.update_competition_category(competition_category_id, competition_category_update)
     if not category:
         raise HTTPException(status_code=404, detail="Competition category not found")

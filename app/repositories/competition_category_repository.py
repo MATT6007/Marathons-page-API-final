@@ -11,7 +11,7 @@ class CompetitionCategoryRepository:
     def __init__(self, db: Session = Depends(get_db)):
         self.db = db
 
-    def get_competition_category(self, competition_category_id: int) -> Type[CompetitionCategory] | None:
+    def get_competition_category(self, competition_category_id: int) -> Type[schemas.CompetitionCategory] | None:
         return self.db.query(CompetitionCategory).filter(CompetitionCategory.ID_competition_category == competition_category_id).first()
 
     def get_competition_categories(self) -> Page[CompetitionCategory]:
@@ -26,10 +26,10 @@ class CompetitionCategoryRepository:
         return db_category
 
     def update_competition_category(self, competition_category_id: int, competition_category_update: schemas.CompetitionCategoryUpdate) -> Type[CompetitionCategory] | None:
-          db_category = self.get_competition_category(competition_category_id_id)
+          db_category = self.get_competition_category(competition_category_id)
           if db_category:
-            for key, value in competition_category_update_update.dict().items():
-                  setattr(db_address, key, value)
+            for key, value in competition_category_update.dict().items():
+                  setattr(db_category, key, value)
             self.db.commit()
             self.db.refresh(db_category)
           return db_category

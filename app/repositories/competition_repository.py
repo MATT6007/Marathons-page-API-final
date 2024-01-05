@@ -53,10 +53,11 @@ class CompetitionRepository:
 
     def delete_competition(self, competition_id: int) -> Competition | None:
         db_competition = self.get_competition(competition_id)
-        if db_competition:
+        if db_competition and db_competition.ID_competition is not None:
             self.db.delete(db_competition)
             self.db.commit()
-        return db_competition
+            return db_competition
+        return None
 
     def create_runner_result(self, runner: Runner, competition: Competition, full_time: str, half_time: str, is_started: bool, is_disqualified: bool):
         result = Results(full_time=full_time, half_time=half_time, runner=runner, competition=competition)

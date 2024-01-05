@@ -12,12 +12,18 @@ class CompetitionCategoryService:
 
     def create_competition_category(self, competition_category_create: competition_category_schema.CompetitionCategoryCreate) -> CompetitionCategory:
         return self.competition_category_repository.create_competition_category(competition_category_create)
+
+    def get_competition_category(self, competition_category_id: int):
+        return self.competition_category_repository.get_competition_category(competition_category_id)
     
     def get_competition_categories(self, skip, limit):
         return self.competition_category_repository.get_competition_categories(skip, limit)
 
     def delete_competition_category(self, competition_category_id: int):
         return self.competition_category_repository.delete_competition_category(competition_category_id)
+
+    def update_competition_category(self, competition_category_id: int, competition_category_update: competition_category_schema.CompetitionCategoryUpdate) -> Type[CompetitionCategory] | None:
+        return self.competition_category_repository.update_competition_category(competition_category_id, competition_category_update)
 
  
 

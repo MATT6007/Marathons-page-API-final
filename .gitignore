@@ -58,3 +58,4 @@ ipython_config.py
 /.venv
 
 ./.venv
+app/sql_app.db
