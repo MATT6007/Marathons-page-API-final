@@ -8,11 +8,6 @@ from models.runner import Runner
 
 router = APIRouter(tags=["CompetitionCategory"])
 
-@router.get("/competition_category", response_model=Page[CompetitionCategory])
-def get_competition_category(competition_category_service: CompetitionCategoryService = Depends(), 
-                  current_user: Runner = Depends(get_current_active_user)) -> Page[CompetitionCategory]:
-    competition_categories = competition_category_service.get_competition_categories()
-    return competition_categories
     
 @router.get("/competition_category/{competition_category_id}", response_model=Type[CompetitionCategory])
 def get_competition_category(competition_category_id: int, competition_category_service: CompetitionCategoryService = Depends(),
