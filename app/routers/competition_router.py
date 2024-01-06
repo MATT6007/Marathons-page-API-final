@@ -25,7 +25,7 @@ def get_competition(competition_id: int, competition_service: CompetitionService
                current_user: Runner = Depends(get_current_active_user)) -> Competition:
     competition = competition_service.get_competition(competition_id)
     if not competition:
-        raise HTTPException(status_code=404, detail="Address not found")
+        raise HTTPException(status_code=404, detail="Competition not found")
     return competition
 
 @router.post("/competition", response_model=Competition)
