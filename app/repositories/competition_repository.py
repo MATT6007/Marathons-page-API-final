@@ -37,7 +37,7 @@ class CompetitionRepository:
             raise HTTPException(status_code=500, detail=str(e))
 
     def get_competitions(self) -> Page[Competition]:
-        query = self.db.query(Competition)
+        query = self.db.query(Competition).order_by(Competition.ID_competition)
         return paginate(query)
 
     def get_competition(self, competition_id: int):
