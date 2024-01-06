@@ -14,7 +14,7 @@ class Competition(Base):
     location = Column(String(32), nullable=False)
     entryfee = Column(DECIMAL(7,2), nullable=False)
     organizer = Column(String(64), nullable=False) 
-    body = Column(String(256), nullable=True)  
+    body = Column(String, nullable=True)  
     image = Column(String(256), nullable=True)  
     
     ID_address = Column(Integer, ForeignKey('addresses.ID_address'))
