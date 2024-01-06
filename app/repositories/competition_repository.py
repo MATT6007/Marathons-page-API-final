@@ -127,5 +127,14 @@ class CompetitionRepository:
 
         return result_data
 
+    def update_competition(self, competition_id: int, competition_update: schemas.CompetitionUpdate):
+        db_competition = self.get_competition(competition_id)
+        if db_competition:
+            for key, value in competition_update.dict().items():
+                setattr(db_competition, key, value)
+            self.db.commit()
+            self.db.refresh(db_competition)
+        return db_competition
+
 
         

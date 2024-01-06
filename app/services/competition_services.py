@@ -45,4 +45,7 @@ class CompetitionService:
     def get_results_for_competition(self,competition_id: int):
         return self.competition_repository.get_results_for_competition(competition_id)
 
+    def update_competition(self, competition_id: int, competition_update: competition_schema.CompetitionUpdate):
+        return self.competition_repository.update_competition(competition_id, competition_update)
+
 

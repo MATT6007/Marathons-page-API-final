@@ -76,4 +76,11 @@ def get_results_for_competition(
     results = competition_service.get_results_for_competition(competition_id=competition_id)
     return results
 
+@router.put("/competition/{competition_id}")
+def update_competition(competition_id: int, competition_update: CompetitionUpdate, competition_service: CompetitionService = Depends(),
+                  current_user: Runner = Depends(get_current_active_user)) -> Competition:
+    competition = competition_service.update_competition(competition_id, competition_update)
+    if not competition:
+        raise HTTPException(status_code=404, detail="Competition not found")
+    return competition
 
